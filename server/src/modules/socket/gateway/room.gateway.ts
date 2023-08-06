@@ -46,7 +46,7 @@ export class SocketRoomGateway {
     const info: TokenModel = await this.cacheManager.get(client.id);
     if (info) {
       try {
-        return { message: 'OK' };
+        return WsResponseUtil({});
       } catch (error) {
         return WsResponseUtil({ status: false, message: error.message });
       }

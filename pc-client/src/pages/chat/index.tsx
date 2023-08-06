@@ -45,9 +45,11 @@ function ChatPage() {
         if (scroll) {
           setScroll(scroll)
         }
-        setMessageList([...res.list, ...messageList])
-        if (res.list.length < pageSize) {
-          setLoading('finish')
+        if (res.data?.list) {
+          setMessageList([...res.data.list, ...messageList])
+          if (res.data.list.length < pageSize) {
+            setLoading('finish')
+          }
         } else {
           setLoading('idle')
         }

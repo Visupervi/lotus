@@ -1,7 +1,6 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import IMClient from '../plugins/im/socket'
 import { ConversationInfo } from '../plugins/im/model'
-import { baseUrl } from '../config'
 import { getUser } from './user'
 
 const initialState: {
@@ -29,7 +28,7 @@ export const getConversationInit = async () => {
   const im = IMClient.getInstance()
   const user = getUser()
   if (!user) {
-    return []
+    return
   }
   await im.login({
     userId: user.userId,

@@ -15,11 +15,11 @@ function BaseWidget() {
   const { conversationList } = useSelector(conversation)
   useEffect(() => {
     getConversationInit().then((res) => {
-      if (Array.isArray(res) && res.length > 0) {
-        setActive(res[0])
-        setFriendList(res)
+      if (res && Array.isArray(res.data) && res.data.length > 0) {
+        setActive(res.data[0])
+        setFriendList(res.data)
       }
-      dispatch(setConversation(res))
+      dispatch(setConversation(res?.data || []))
     })
   }, [])
 

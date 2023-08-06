@@ -16,6 +16,7 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { UserService } from 'src/modules/user/user.service';
 import { MessageService } from 'src/modules/message/message.service';
 import { RoomService } from 'src/modules/room/room.service';
+import WsResponseUtil from 'src/utils/wsResponse';
 @WebSocketGateway({
   cors: {
     origin: '*',
@@ -76,10 +77,10 @@ export class SocketMessageGateway {
               this.server.to(socketId as string).emit(IMEvents.message, res);
             }
           }
-          return callbackMsg;
+          return WsResponseUtil({ data: callbackMsg });
         }
       } catch (error) {
-        return { status: false, message: error.message };
+        return WsResponseUtil({ status: false, message: error.message });
       }
     }
   }
@@ -90,7 +91,7 @@ export class SocketMessageGateway {
     if (info) {
       try {
         const data = await this.messageService.getMessageList(info.userId, params);
-        return data;
+        return WsResponseUtil({ data });
       } catch (error) {
         return { status: false, message: error.message };
       }

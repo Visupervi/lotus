@@ -127,7 +127,7 @@ export class SocketBaseGateway {
           const message = await this.messageService.getLastMessage(iterator.roomId);
           list.push({ ...iterator, lastMessage: message });
         }
-        return list;
+        return WsResponseUtil({ data: list });
       } catch (error) {
         return WsResponseUtil({ status: false, message: error.message });
       }
