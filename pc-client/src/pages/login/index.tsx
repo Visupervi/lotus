@@ -1,7 +1,7 @@
 import { ApiLogin, loginReq } from '@/api/user.api'
 import { saveUser } from '@/store/user'
 import { emailRule } from '@/utils'
-import { Button, Form, Input } from 'antd'
+import { Button, Form, Input, message } from 'antd'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
@@ -10,9 +10,13 @@ function LoginPage() {
   const navigate = useNavigate()
   const onFinish = async (values: loginReq) => {
     setLoading(true)
-    const res = await ApiLogin(values)
-    saveUser(res.data)
-    navigate('/chat')
+    try {
+      const res = await ApiLogin(values)
+      saveUser(res.data)
+      navigate('/chat')
+    } catch (error: any) {
+      message.warning(error.error)
+    }
     setLoading(false)
   }
 

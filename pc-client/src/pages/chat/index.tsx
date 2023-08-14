@@ -82,7 +82,7 @@ function ChatPage() {
   }
 
   return (
-    <div className="bg-white">
+    <div className="">
       {roomId ? (
         <div className={`${chatCss.chat} h-screen flex flex-col`}>
           <MessageView roomId={roomId} messageList={messageList} ref={messageViewRef} onLoadMore={onLoad} />

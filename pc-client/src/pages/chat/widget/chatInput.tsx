@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { useDispatch } from 'react-redux'
 import { Button } from 'antd'
 import { IMMessageTypes } from '@/plugins/im/enum'
 import { IMMessage, IMTextMessage } from '@/plugins/im/model'
@@ -9,6 +7,7 @@ import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import DOMPurify from 'dompurify'
 import './edit.less'
+import { FileImageFilled } from '@ant-design/icons'
 
 const im = IMClient.getInstance()
 function ChatInput({ roomId, pushMessag }: { roomId: string; pushMessag: (message: IMMessage) => void }) {
@@ -28,7 +27,7 @@ function ChatInput({ roomId, pushMessag }: { roomId: string; pushMessag: (messag
       }
     })
     editor?.commands.setContent('')
-    pushMessag(message)
+    message && pushMessag(message)
   }
 
   const editor = useEditor({
@@ -41,8 +40,17 @@ function ChatInput({ roomId, pushMessag }: { roomId: string; pushMessag: (messag
     content: ''
   })
 
+  const Funs = () => {
+    return (
+      <div className="h-8">
+        <Button type="text" icon={<FileImageFilled rev={undefined} />} />
+      </div>
+    )
+  }
+
   return (
-    <div className="h-36 p-2 shadow shadow-indigo-500/40">
+    <div className="p-2 shadow shadow-indigo-500/40">
+      <Funs />
       <EditorContent editor={editor} />
       <div className="pt-1 flex justify-end">
         <Button onClick={onSend}>发送</Button>

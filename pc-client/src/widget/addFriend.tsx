@@ -1,7 +1,7 @@
 import { baseUrl } from '@/config'
 import { Friend } from '@/model'
 import IMClient from '@/plugins/im/socket'
-import { Avatar, Input, Modal, Spin } from 'antd'
+import { Avatar, Input, Modal, Spin, message } from 'antd'
 import { forwardRef, useImperativeHandle, useState } from 'react'
 
 const AddFriend = forwardRef((_, ref) => {
@@ -24,12 +24,16 @@ const AddFriend = forwardRef((_, ref) => {
   const [friend, setFriend] = useState<Friend>()
   const onSearch = async (val: string) => {
     setLoading(true)
-    const res = await im.getFriendSearch(val)
-    if (res.status) {
-      setFriend(res.data)
+    try {
+      const res = await im.getFriendSearch(val)
+      console.log(res)
+      if (res.status) {
+        setFriend(res.data)
+      }
+    } catch (error: any) {
+      message.warning(error.message)
     }
     setLoading(false)
-    console.log(res)
   }
 
   return (

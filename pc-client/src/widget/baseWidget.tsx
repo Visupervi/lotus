@@ -26,9 +26,9 @@ function BaseWidget() {
   const [active, setActive] = useState<ConversationInfo>()
   const itemClass = (item: ConversationInfo) => {
     if (active && item.id === active.id) {
-      return 'shadow mb-1 rounded-xl border-2 border-violet-800'
+      return 'mb-1 rounded-xl border-violet-800'
     }
-    return 'shadow mb-1 rounded-xl border-2'
+    return 'mb-1 rounded-xl border-2'
   }
   const itemStyle = (item: ConversationInfo) => {
     if (active && item.id === active.id) {
@@ -118,7 +118,7 @@ function BaseWidget() {
   return (
     <div className="w-screen h-screen">
       <div className="flex">
-        <div className="w-1/4 h-screen flex flex-col">
+        <div className="w-1/4 h-screen flex flex-col bg-white">
           <div className="flex p-2">
             <Input allowClear className=" flex-1" onChange={onSearchChange} />
             <Button

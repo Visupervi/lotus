@@ -110,7 +110,11 @@ export default class IMClient {
     }
     return new Promise(async (resolve, reject) => {
       const res = await this.emit(types, options)
-      resolve(res)
+      if (res.status) {
+        resolve(res)
+      } else {
+        reject(res)
+      }
     })
   }
 }

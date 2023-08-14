@@ -37,7 +37,7 @@ export type IMTextMessage = {
   text: string
 }
 
-export type IMIMageMessage = {
+export type IMImageMessage = {
   url: string
 }
 
@@ -51,7 +51,7 @@ type MessageData = {
   type: string
   content: {
     type: string
-    content: IMTextMessage | IMIMageMessage | IMVideoMessage
+    content: IMTextMessage | IMImageMessage | IMVideoMessage
   }
 }
 
